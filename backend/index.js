@@ -40,6 +40,9 @@ io.on("connection", (socket) => {
     })
 })
 
-app.use("/", express.static(path.join(__dirname, "index.html")))
+app.get("/", (req, res) => {
+    res.send("<h2>Chat app server currently running...</h2>")
+})
 
-server.listen(process.env.port || 5000, () => console.log("Server has started"))
+const PORT = process.env.PORT || 5000
+server.listen(PORT, () => console.log(`Server has started on ${PORT}`))
