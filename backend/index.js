@@ -1,7 +1,7 @@
 const express = require("express");
 const http = require("http");
 const cors = require("cors");
-
+const path = require("path");
 
 const app = express();
 const server = http.createServer(app)
@@ -39,5 +39,7 @@ io.on("connection", (socket) => {
         io.to(user.room).emit("message", {user:{name:"admin"}, message:`${user.name} has left the chat room`});
     })
 })
+
+app.use("/", express.static(path.join(__dirname, "index.html")))
 
 server.listen(process.env.port || 5000, () => console.log("Server has started"))
